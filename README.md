@@ -1,4 +1,4 @@
-# idlogit
+# idlogit (CURRENTLY IN DEVELOPMENT)
 
 `idlogit` is a python "package" for estimating "idLogit" models, or Logit models with Idiosyncratic Deviations. The idLogit is a non-parametric model of choice heterogeneity with a convex maximum likelihood estimation problem. 
 
@@ -30,7 +30,7 @@ and
 * `x` (numpy.array) is a K-vector of estimated coefficients
 * `info` (numpy.array) is the ECOS information structure resulting from the solve attempt
 
-There are, of course, options we cover later. 
+There are, of course, options we cover below. 
 
 ## Options
 
