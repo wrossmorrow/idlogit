@@ -37,7 +37,7 @@ There are, of course, options we cover below. If a sparse `X` matrix is passed, 
 Options that can currently be passed: 
 
 * `constant` (boolean) Include a constant in the model, or not. The returned `x` will be `K+1` if `True`, with the first element being the estimated parameter corresponding to the constant. 
-* `og` (boolean) Is there an "outside good", "outside option", or no-choice option? 
+* `outopt` (boolean) Is there an "outside good", "outside option", or no-choice option? 
 * `Lambdas` (list) A 2-element list of L1 and L2 penalty parameter values (respectively). 
 * `bin` (list) A list of indices from 1,...,K that identify which variables in `X` are _binary_ (0/1). Indices must be mutually exclusive with `cat`. Binary variables are encoded with a single dummy equal to 1 for any "truthy" value in `X`. 
 * `cat` (list) A list of indices from 1,...,K that identify which are _categorical_ (finite, with level-specific coefficients). Indices must be mutually exclusive with `bin`. Categorical variables are analyzed for their cardinality and subsequently "expanded" into level-dummies whose coefficients are constrained to sum to zero for identification. 
