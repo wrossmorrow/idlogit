@@ -116,10 +116,14 @@ def idLogit_l1( K , I , N , y , X , ind , constant=False , Lambda1=1000.0 , prin
     if( Lambda1 <= 0.0 ) : 
         return idLogit_np( K , I , N , y , X )
 
-
     IK = I * K
     Ninv  = 1.0 / N
-    Xnnz = X.nnz if issparse(X) else ( X.shape[0] * X.shape[1] )
+    if issparse(X) : 
+        X = X.tocoo()
+        Xnnz = X.nnz 
+    else : 
+        Xnnz = X.shape[0] * X.shape[1]
+
 
     Nvars = K + 3 * IK + 4 * N          # b , l , u , v , w , d , p , m
     
@@ -510,7 +514,11 @@ def idLogit_l2( K , I , N , y , X , ind , constant=False , Lambda2=1000.0 , prin
 
     IK = I * K
     Ninv  = 1.0 / N
-    Xnnz = X.nnz if issparse(X) else ( X.shape[0] * X.shape[1] )
+    if issparse(X) : 
+        X = X.tocoo()
+        Xnnz = X.nnz 
+    else : 
+        Xnnz = X.shape[0] * X.shape[1]
 
     Nvars = K + IK + 4 * N + 1              # b , l , u , v , w , d , t
     
@@ -872,7 +880,11 @@ def idLogit_en( K , I , N , y , X , ind , constant=False , Lambdas=[1000.0,1000.
 
     IK = I * K
     Ninv  = 1.0 / N
-    Xnnz = X.nnz if issparse(X) else ( X.shape[0] * X.shape[1] )
+    if issparse(X) : 
+        X = X.tocoo()
+        Xnnz = X.nnz 
+    else : 
+        Xnnz = X.shape[0] * X.shape[1]
 
     Nvars = K + 3 * IK + 4 * N + 1          # b, l, u, v, w, d, p, m, t
     

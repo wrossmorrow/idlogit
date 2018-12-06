@@ -30,11 +30,11 @@ and
 * `x` (numpy.array) is a K-vector of estimated coefficients
 * `info` (numpy.array) is the ECOS information structure resulting from the solve attempt
 
-There are, of course, options we cover below. 
+There are, of course, options we cover below. If a sparse `X` matrix is passed, it is internally transformed into a `scipy.sparse.coo_matrix` before use. If a dense `X` matrix is passed, it is _not_ processed as a sparse matrix; that is to say, `idlogit` presumes _all_ of `X`'s entries are nonzero. If this is not the case (for example, you have hard-coded dummies in the data) using a sparse matrix may be much better. 
 
 ## Options
 
-Various options can be passed: 
+Options that can currently be passed: 
 
 * `constant` (boolean) Include a constant in the model, or not. The returned `x` will be `K+1` if `True`, with the first element being the estimated parameter corresponding to the constant. 
 * `Lambdas` (list) A 2-element list of L1 and L2 penalty parameter values (respectively). 
