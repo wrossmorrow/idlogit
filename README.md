@@ -39,8 +39,8 @@ Options that can currently be passed:
 * `constant` (boolean) Include a constant in the model, or not. The returned `x` will be `K+1` if `True`, with the first element being the estimated parameter corresponding to the constant. 
 * `outopt` (boolean) Is there an "outside good", "outside option", or no-choice option? 
 * `Lambdas` (list) A 2-element list of L1 and L2 penalty parameter values (respectively). 
-* `bin` (list) A list of indices from 1,...,K that identify which variables in `X` are _binary_ (0/1). Indices must be mutually exclusive with `cat`. Binary variables are encoded with a single dummy equal to 1 for any "truthy" value in `X`. 
-* `cat` (list) A list of indices from 1,...,K that identify which are _categorical_ (finite, with level-specific coefficients). Indices must be mutually exclusive with `bin`. Categorical variables are analyzed for their cardinality and subsequently "expanded" into level-dummies whose coefficients are constrained to sum to zero for identification. 
+* `bin` (list) A list of indices from 1,...,K that identify which variables in `X` are _binary_ (0/1). Indices must be mutually exclusive with `cat`. Binary variables are encoded with a single dummy equal to 1 for any "truthy" value in `X`. Variables not in `bin` or `cat` are interpreted as numerical and not transformed. 
+* `cat` (list) A list of indices from 1,...,K that identify which are _categorical_ (finite, with level-specific coefficients). Indices must be mutually exclusive with `bin`. Categorical variables are analyzed for their cardinality and subsequently "expanded" into level-dummies whose coefficients are constrained to sum to zero for identification. Variables not in `bin` or `cat` are interpreted as numerical and not transformed. 
 * `prints` (dict) A dictionary of prints of the ECOS data created (for debugging, really). Valid keys are `start`, `costs`, `lineq`, `lerhs`, `cones`, `ccrhs`, and valid values are booleans (or anything "truthy").
 
 as well as any options for [`ecos-python`](https://github.com/embotech/ecos-python) passed directly to ECOS as `**kwargs`. 
