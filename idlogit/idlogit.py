@@ -13,7 +13,7 @@ from scipy.sparse import coo_matrix , csc_matrix , issparse
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
-def idLogit( K , I , N , y , X , ind , constant=False , Lambdas=[1000.0,1000.0] , prints={} , **kwargs ) : 
+def idLogit( K , I , N , y , X , ind , constant=False , og=False , Lambdas=[1000.0,1000.0] , prints={} , **kwargs ) : 
     
     """idLogit model estimation routine, MLE problem solved with the ECOS solver. 
 
@@ -38,14 +38,14 @@ def idLogit( K , I , N , y , X , ind , constant=False , Lambdas=[1000.0,1000.0] 
     
     if( Lambdas[0] <= 0.0 ) : # no L1 penalty
         if( Lambdas[1] <= 0.0 ) : # niether penalties
-            return idLogit_np( K , I , N , y , X , ind , constant=constant , prints=prints , **kwargs )
+            return idLogit_np( K , I , N , y , X , ind , constant=constant , og=og , prints=prints , **kwargs )
         else : # L2 penalty only
-            return idLogit_l2( K , I , N , y , X , ind , constant=constant , Lambda2=Lambda[1] , prints=prints , **kwargs )
+            return idLogit_l2( K , I , N , y , X , ind , constant=constant , og=og , prints=prints , **kwargs )
     else : # Lambdas[0] > 0
         if( Lambdas[1] <= 0.0 ) : # L1 penalty only
-            return idLogit_l1( K , I , N , y , X , ind , constant=constant , Lambda1=Lambdas[0] , prints=prints , **kwargs )
+            return idLogit_l1( K , I , N , y , X , ind , constant=constant , og=og , prints=prints , **kwargs )
         else : # both penalties
-            return idLogit_en( K , I , N , y , X , ind , constant=constant , Lambdas=Lambdas , prints=prints , **kwargs )
+            return idLogit_en( K , I , N , y , X , ind , constant=constant , og=og , prints=prints , **kwargs )
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
@@ -57,7 +57,7 @@ def idLogit( K , I , N , y , X , ind , constant=False , Lambdas=[1000.0,1000.0] 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
-def idLogit_np( K , I , N , y , X , ind , constant=False , prints={} , **kwargs ) : 
+def idLogit_np( K , I , N , y , X , ind , constant=False , og=False , prints={} , **kwargs ) : 
     
     """idLogit with no penalties. 
 
@@ -92,7 +92,7 @@ def idLogit_np( K , I , N , y , X , ind , constant=False , prints={} , **kwargs 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
-def idLogit_l1( K , I , N , y , X , ind , constant=False , Lambda1=1000.0 , prints={} , **kwargs ) : 
+def idLogit_l1( K , I , N , y , X , ind , constant=False , og=False , Lambda1=1000.0 , prints={} , **kwargs ) : 
     
     """idLogit model estimation with L1 penalty, MLE solved with the ECOS solver. 
     
@@ -487,7 +487,7 @@ def idLogit_l1( K , I , N , y , X , ind , constant=False , Lambda1=1000.0 , prin
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
-def idLogit_l2( K , I , N , y , X , ind , constant=False , Lambda2=1000.0 , prints={} , **kwargs ) : 
+def idLogit_l2( K , I , N , y , X , ind , constant=False , og=False , Lambda2=1000.0 , prints={} , **kwargs ) : 
     
     """idLogit model estimation with L2 penalty, MLE solved with the ECOS solver. 
     
@@ -857,7 +857,7 @@ def idLogit_l2( K , I , N , y , X , ind , constant=False , Lambda2=1000.0 , prin
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
     
-def idLogit_en( K , I , N , y , X , ind , constant=False , Lambdas=[1000.0,1000.0] , prints={} , **kwargs ) : 
+def idLogit_en( K , I , N , y , X , ind , constant=False , og=False , Lambdas=[1000.0,1000.0] , prints={} , **kwargs ) : 
     
     """idLogit model estimation with Elastic Net penalty, MLE solved with the ECOS solver. 
     

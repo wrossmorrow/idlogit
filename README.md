@@ -37,7 +37,9 @@ There are, of course, options we cover below. If a sparse `X` matrix is passed, 
 Options that can currently be passed: 
 
 * `constant` (boolean) Include a constant in the model, or not. The returned `x` will be `K+1` if `True`, with the first element being the estimated parameter corresponding to the constant. 
+* `og` (boolean) Is there an "outside good", "outside option", or no-choice option? 
 * `Lambdas` (list) A 2-element list of L1 and L2 penalty parameter values (respectively). 
+* `bincat` (dict) A dictionary with fields `bin`, `cat` each of which is a list of indices from 1,...,K that identify which variables in `X` are _binary_ (0/1), which are _categorical_ (finite, with level-specific coefficients). Indices must be mutually exclusive. Binary variables are encoded with a single dummy equal to 1 for any "truthy" value in `X`. Categorical variables are analyzed for their cardinality and subsequently "expanded" into level-dummies whose coefficients are constrained to sum to zero for identification. 
 * `prints` (dict) A dictionary of prints of the ECOS data created (for debugging, really). Valid keys are `start`, `costs`, `lineq`, `lerhs`, `cones`, `ccrhs`, and valid values are booleans (or anything "truthy").
 
 as well as any options for [`ecos-python`](https://github.com/embotech/ecos-python) passed directly to ECOS as `**kwargs`. 
